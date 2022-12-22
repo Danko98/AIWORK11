@@ -6,10 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.gullbozor.gullbozor.apiResponse.ApiResponse;
 import uz.gullbozor.gullbozor.apiResponse.UserData;
-import uz.gullbozor.gullbozor.dto.CheckPhoneNumberDto;
-import uz.gullbozor.gullbozor.dto.RegisterDto;
-import uz.gullbozor.gullbozor.dto.Login;
-import uz.gullbozor.gullbozor.dto.VerifyDto;
+import uz.gullbozor.gullbozor.dto.*;
 import uz.gullbozor.gullbozor.service.AuthService;
 import uz.gullbozor.gullbozor.verifysms.PhoneNumberDto;
 import uz.gullbozor.gullbozor.verifysms.PhoneVerificationService;
@@ -42,6 +39,14 @@ public class AuthController {
        ApiResponse apiResponse = authService.registerUser(registerDto);
        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
    }
+
+
+    @PostMapping("/registerCompany")
+    public ResponseEntity<ApiResponse> registerCompanyOwner(@RequestBody RegisterCompanyOwner registerCompanyOwner) {
+        ApiResponse apiResponse = authService.registerCompanyOwner(registerCompanyOwner);
+        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+    }
+
 
 
 

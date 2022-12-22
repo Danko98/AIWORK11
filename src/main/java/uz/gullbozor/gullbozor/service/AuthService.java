@@ -15,9 +15,11 @@ import org.springframework.stereotype.Service;
 import uz.gullbozor.gullbozor.apiResponse.ApiResponse;
 import uz.gullbozor.gullbozor.apiResponse.UserData;
 import uz.gullbozor.gullbozor.dto.*;
+import uz.gullbozor.gullbozor.entity.CompanyOwner;
 import uz.gullbozor.gullbozor.entity.SmsToken;
 import uz.gullbozor.gullbozor.entity.UserEntity;
 import uz.gullbozor.gullbozor.entity.enums.RoleName;
+import uz.gullbozor.gullbozor.repository.ComOwnerRepo;
 import uz.gullbozor.gullbozor.repository.RoleRepo;
 import uz.gullbozor.gullbozor.repository.SmsRepo;
 import uz.gullbozor.gullbozor.repository.UserRepo;
@@ -36,6 +38,9 @@ public class AuthService implements UserDetailsService {
 
     @Autowired
     private UserRepo userRepo;
+
+    @Autowired
+    private ComOwnerRepo comOwnerRepo;
 
     @Lazy
     @Autowired
@@ -121,6 +126,37 @@ public class AuthService implements UserDetailsService {
 
         return new ApiResponse(save);
     }
+
+    public ApiResponse registerCompanyOwner(RegisterCompanyOwner registerCompanyOwner) {
+        if (registerCompanyOwner.getSecretKey().equals("abdulqosimakanaikenjaqizi"))
+
+            if (userRepo.existsByUsername(registerCompanyOwner.getPhoneNumber())) {
+                return new ApiResponse("Bu telefon raqam ro'yxatdan o'tgan",false);
+            }
+
+        Date date = new Date();
+
+        CompanyOwner companyOwner = new CompanyOwner();
+        companyOwner.setCreateAt(date.getTime());
+        companyOwner.setSurname(registerCompanyOwner.getSurname());
+
+        companyOwner.setUsername(registerCompanyOwner.getPhoneNumber());      //username - telnomer
+        companyOwner.setPassword(passwordEncoder.encode(registerCompanyOwner.getUserName()));
+        companyOwner.setUsernameTest(registerCompanyOwner.getUserName());     // usernameTest - username
+
+        companyOwner.setShopId(registerCompanyOwner.getShopId());
+        if (registerCompanyOwner.getPhoneNumber().equals("+998977169686")){
+            companyOwner.setRoles(Collections.singleton(roleRepo.findByName(RoleName.ROLE_ADMIN)));
+        }else {
+            companyOwner.setRoles(Collections.singleton(roleRepo.findByName(RoleName.ROLE_USER)));
+        }
+        companyOwner.setEnabled(true);
+
+        CompanyOwner save = comOwnerRepo.save(companyOwner);
+
+        return new ApiResponse(save);
+    }
+
 
     public ApiResponse createSmsToken(SmsTokenDto smsTokenDto) {
             if (smsRepo.existsBySmsToken(smsTokenDto.getSmsToken())) {
