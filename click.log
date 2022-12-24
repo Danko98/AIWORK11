@@ -1,29 +1,69 @@
-2022-12-20 10:28:09 - Starting GullBozorApplication using Java 19.0.1 on MacBooks-MacBook-Pro.local with PID 37224 (/Users/macbookpro/Desktop/Архив ZIP - WinRAR (3)/GullBozor-master/target/classes started by macbookpro in /Users/macbookpro/Desktop/Архив ZIP - WinRAR (3)/GullBozor-master)
-2022-12-20 10:28:09 - The following 1 profile is active: "dev"
-2022-12-20 10:28:10 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2022-12-20 10:28:10 - Finished Spring Data repository scanning in 87 ms. Found 16 JPA repository interfaces.
-2022-12-20 10:28:10 - Tomcat initialized with port(s): 8080 (http)
-2022-12-20 10:28:10 - Starting service [Tomcat]
-2022-12-20 10:28:10 - Starting Servlet engine: [Apache Tomcat/9.0.62]
-2022-12-20 10:28:10 - Initializing Spring embedded WebApplicationContext
-2022-12-20 10:28:10 - Root WebApplicationContext: initialization completed in 1554 ms
-2022-12-20 10:28:11 - HikariPool-1 - Starting...
-2022-12-20 10:28:11 - HikariPool-1 - Start completed.
-2022-12-20 10:28:12 - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2022-12-20 10:28:13 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-12-20 10:28:13 - Unable to proxy interface-implementing method [public final void org.springframework.web.filter.OncePerRequestFilter.doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain) throws javax.servlet.ServletException,java.io.IOException] because it is marked as final: Consider using interface-based JDK proxies instead!
-2022-12-20 10:28:13 - Unable to proxy interface-implementing method [public final void org.springframework.web.filter.GenericFilterBean.init(javax.servlet.FilterConfig) throws javax.servlet.ServletException] because it is marked as final: Consider using interface-based JDK proxies instead!
-2022-12-20 10:28:14 - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7154a248, org.springframework.security.web.context.SecurityContextPersistenceFilter@301c622d, org.springframework.security.web.header.HeaderWriterFilter@b21cbbf, org.springframework.web.filter.CorsFilter@435a4d2d, org.springframework.security.web.authentication.logout.LogoutFilter@6e6ec71f, uz.gullbozor.gullbozor.security.JwtFilter@4e212f46, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@16a78700, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@58ec3e8b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7aa5292d, org.springframework.security.web.session.SessionManagementFilter@5dabe7c8, org.springframework.security.web.access.ExceptionTranslationFilter@2226fd2b, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@22db974d]
-2022-12-20 10:28:14 - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
-2022-12-20 10:28:14 - Tomcat started on port(s): 8080 (http) with context path ''
-2022-12-20 10:28:14 - Context refreshed
-2022-12-20 10:28:15 - Found 1 custom documentation plugin(s)
-2022-12-20 10:28:15 - Scanning for api listing references
-2022-12-20 10:28:15 - Generating unique operation named: getAnnouncesByShopIdUsingGET_1
-2022-12-20 10:28:15 - Generating unique operation named: getAnnouncesByShopIdUsingGET_2
-2022-12-20 10:28:15 - Generating unique operation named: deleteAllByPinUsingDELETE_1
-2022-12-20 10:28:15 - Generating unique operation named: deleteByIdUsingDELETE_1
-2022-12-20 10:28:15 - Started GullBozorApplication in 6.375 seconds (JVM running for 12.119)
-2022-12-20 10:28:35 - Closing JPA EntityManagerFactory for persistence unit 'default'
-2022-12-20 10:28:35 - HikariPool-1 - Shutdown initiated...
-2022-12-20 10:28:35 - HikariPool-1 - Shutdown completed.
+2022-12-24 12:49:56 - Starting GullBozorApplication using Java 19.0.1 on MacBooks-MacBook-Pro.local with PID 64911 (/Users/macbookpro/Desktop/AIWORK11/target/classes started by macbookpro in /Users/macbookpro/Desktop/AIWORK11)
+2022-12-24 12:49:56 - The following 1 profile is active: "dev"
+2022-12-24 12:49:56 - Starting GullBozorApplication using Java 19.0.1 on MacBooks-MacBook-Pro.local with PID 64912 (/Users/macbookpro/Desktop/AIWORK11/target/classes started by macbookpro in /Users/macbookpro/Desktop/AIWORK11)
+2022-12-24 12:49:56 - The following 1 profile is active: "dev"
+2022-12-24 12:49:57 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-12-24 12:49:57 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-12-24 12:49:57 - Finished Spring Data repository scanning in 84 ms. Found 20 JPA repository interfaces.
+2022-12-24 12:49:57 - Finished Spring Data repository scanning in 90 ms. Found 20 JPA repository interfaces.
+2022-12-24 12:49:58 - Tomcat initialized with port(s): 8080 (http)
+2022-12-24 12:49:58 - Tomcat initialized with port(s): 8080 (http)
+2022-12-24 12:49:58 - Starting service [Tomcat]
+2022-12-24 12:49:58 - Starting service [Tomcat]
+2022-12-24 12:49:58 - Starting Servlet engine: [Apache Tomcat/9.0.62]
+2022-12-24 12:49:58 - Starting Servlet engine: [Apache Tomcat/9.0.62]
+2022-12-24 12:49:58 - Initializing Spring embedded WebApplicationContext
+2022-12-24 12:49:58 - Root WebApplicationContext: initialization completed in 2012 ms
+2022-12-24 12:49:58 - Initializing Spring embedded WebApplicationContext
+2022-12-24 12:49:58 - Root WebApplicationContext: initialization completed in 2012 ms
+2022-12-24 12:49:59 - HikariPool-1 - Starting...
+2022-12-24 12:49:59 - HikariPool-1 - Starting...
+2022-12-24 12:49:59 - HikariPool-1 - Start completed.
+2022-12-24 12:49:59 - HikariPool-1 - Start completed.
+2022-12-24 12:50:01 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-12-24 12:50:01 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-12-24 12:50:02 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-12-24 12:50:02 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-12-24 12:50:02 - Unable to proxy interface-implementing method [public final void org.springframework.web.filter.OncePerRequestFilter.doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain) throws javax.servlet.ServletException,java.io.IOException] because it is marked as final: Consider using interface-based JDK proxies instead!
+2022-12-24 12:50:02 - Unable to proxy interface-implementing method [public final void org.springframework.web.filter.GenericFilterBean.init(javax.servlet.FilterConfig) throws javax.servlet.ServletException] because it is marked as final: Consider using interface-based JDK proxies instead!
+2022-12-24 12:50:02 - Unable to proxy interface-implementing method [public final void org.springframework.web.filter.OncePerRequestFilter.doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain) throws javax.servlet.ServletException,java.io.IOException] because it is marked as final: Consider using interface-based JDK proxies instead!
+2022-12-24 12:50:02 - Unable to proxy interface-implementing method [public final void org.springframework.web.filter.GenericFilterBean.init(javax.servlet.FilterConfig) throws javax.servlet.ServletException] because it is marked as final: Consider using interface-based JDK proxies instead!
+2022-12-24 12:50:03 - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@56ed9270, org.springframework.security.web.context.SecurityContextPersistenceFilter@796d0b43, org.springframework.security.web.header.HeaderWriterFilter@2474331d, org.springframework.web.filter.CorsFilter@551fefe8, org.springframework.security.web.authentication.logout.LogoutFilter@4a57ad67, uz.gullbozor.gullbozor.security.JwtFilter@3f523dae, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@42cef0af, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5a75bad4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@35ec9d29, org.springframework.security.web.session.SessionManagementFilter@583b177a, org.springframework.security.web.access.ExceptionTranslationFilter@76629f82, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7cbcd27e]
+2022-12-24 12:50:03 - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7b99e726, org.springframework.security.web.context.SecurityContextPersistenceFilter@a824f87, org.springframework.security.web.header.HeaderWriterFilter@19984625, org.springframework.web.filter.CorsFilter@1b841396, org.springframework.security.web.authentication.logout.LogoutFilter@628190ec, uz.gullbozor.gullbozor.security.JwtFilter@4795876e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1eb3a6a3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@49c3487f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@34e4a136, org.springframework.security.web.session.SessionManagementFilter@18ac2dfe, org.springframework.security.web.access.ExceptionTranslationFilter@6872201, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@15eaa2ce]
+2022-12-24 12:50:03 - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-12-24 12:50:03 - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-12-24 12:50:04 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+2022-12-24 12:50:04 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-12-24 12:50:04 - Tomcat started on port(s): 8080 (http) with context path ''
+2022-12-24 12:50:04 - Context refreshed
+2022-12-24 12:50:04 - HikariPool-1 - Shutdown initiated...
+2022-12-24 12:50:04 - HikariPool-1 - Shutdown completed.
+2022-12-24 12:50:04 - Stopping service [Tomcat]
+2022-12-24 12:50:04 - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2022-12-24 12:50:04 - Found 1 custom documentation plugin(s)
+2022-12-24 12:50:04 - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2022-12-24 12:50:04 - Scanning for api listing references
+2022-12-24 12:50:04 - Generating unique operation named: getAnnouncesByShopIdUsingGET_1
+2022-12-24 12:50:04 - Generating unique operation named: getAnnouncesByShopIdUsingGET_2
+2022-12-24 12:50:04 - Generating unique operation named: deleteRegionByIdUsingDELETE_1
+2022-12-24 12:50:04 - Generating unique operation named: deleteAllByPinUsingDELETE_1
+2022-12-24 12:50:04 - Generating unique operation named: deleteByIdUsingDELETE_1
+2022-12-24 12:50:04 - Started GullBozorApplication in 8.751 seconds (JVM running for 14.503)
+2022-12-24 12:50:11 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-12-24 12:50:11 - HikariPool-1 - Shutdown initiated...
+2022-12-24 12:50:11 - HikariPool-1 - Shutdown completed.

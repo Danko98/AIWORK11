@@ -20,7 +20,7 @@ public class CompanyRegisterDto {
     //***********************************************
 
 
-    private Long userId;
+    private Long companyOwnerId;
     private String CompanyName;
 
     private String location;

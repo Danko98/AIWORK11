@@ -1,13 +1,12 @@
 package uz.gullbozor.gullbozor.dto;
 
-import lombok.Data;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class NewOrderParam {
-
 
 
     private Byte type;

@@ -18,8 +18,8 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-    @Autowired
-    private PhoneVerificationService phoneVerificationService;
+//    @Autowired
+//    private PhoneVerificationService phoneVerificationService;
 
 
     @PostMapping("/checkPhoneNumber")
@@ -41,7 +41,7 @@ public class AuthController {
    }
 
 
-    @PostMapping("/registerCompany")
+    @PostMapping("/registerCompanyOwner")
     public ResponseEntity<ApiResponse> registerCompanyOwner(@RequestBody RegisterCompanyOwner registerCompanyOwner) {
         ApiResponse apiResponse = authService.registerCompanyOwner(registerCompanyOwner);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
