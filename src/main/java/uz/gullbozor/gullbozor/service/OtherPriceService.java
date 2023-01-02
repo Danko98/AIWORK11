@@ -107,10 +107,10 @@ public class OtherPriceService {
             othersPrice.setIspandiletPrice(othersPriceDto.getIspandiletPrice());
             othersPrice.setSulchikPrice(othersPriceDto.getSulchikPrice());
             othersPrice.setSulchikPriceColor(othersPriceDto.getSulchikPriceColor());
-            othersPrice.setIlmoqPrice(othersPriceDto.getIlmoqPrice());
-            othersPrice.setIlmoqPriceColor(othersPriceDto.getIlmoqPriceColor());
+            othersPrice.setIlmoqAluPrice(othersPriceDto.getIlmoqAluPrice());
+            othersPrice.setIlmoqAluPriceColor(othersPriceDto.getIlmoqAluPriceColor());
             othersPrice.setZamok155MiniPrice(othersPriceDto.getZamok155MiniPrice());
-            othersPrice.setZamok155MaxPrice(othersPriceDto.getZamok155MaxPrice());
+            othersPrice.setZamok155Price(othersPriceDto.getZamok155Price());
             othersPrice.setZamok153Price(othersPriceDto.getZamok153Price());
             othersPrice.setArchaMiniPrice(othersPriceDto.getArchaMiniPrice());
             othersPrice.setArchaBalkonPrice(othersPriceDto.getArchaBalkonPrice());

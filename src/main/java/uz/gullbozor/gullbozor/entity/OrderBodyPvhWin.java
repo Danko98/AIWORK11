@@ -31,6 +31,11 @@ public class OrderBodyPvhWin {
     private Byte shelf_size;
     private Byte color;
     private Byte glassTypeNum;
+    private Long glass1;
+    private Long glass2;
+    private Long glass3;
+    private Long glass4;
+    private Long glass5;
     private Byte ruchka;
     private Byte petlya;
     private Byte saydinitel;
@@ -66,9 +71,11 @@ public class OrderBodyPvhWin {
     private Double samarezSum;
     private Double ispandiletSum;
     private Double ikkitalikMexanizm;
+    private Double ikkitalikMexanizmSum;
 
     private Double totalPrice;
     private Double companyPartPrice;
+    private Double orderCost;
     private Double salePrice;
 
 

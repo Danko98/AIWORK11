@@ -1,5 +1,7 @@
 package uz.gullbozor.gullbozor.entity;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -10,7 +12,8 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 
 
-@Data
+@Getter
+@Setter
 @MappedSuperclass
 public class BaseEntity {
 

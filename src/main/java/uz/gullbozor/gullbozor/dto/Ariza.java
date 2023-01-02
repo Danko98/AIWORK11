@@ -6,9 +6,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class NewOrderParam {
-
-
+public class Ariza {
+    
     private Integer width;
     private Integer height;
     private Integer count;
@@ -16,10 +15,7 @@ public class NewOrderParam {
     private Byte glassNumber;
     private Integer category;
     private Byte shelfSize;
-    private Long companyId;
     private String orderHolderName;
     private String orderHolderPhone;
-    private Byte ruchka;
-    private boolean responseToCompany;
 
 }

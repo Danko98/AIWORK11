@@ -3,14 +3,13 @@ package uz.gullbozor.gullbozor.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uz.gullbozor.gullbozor.apiResponse.ApiResponse;
+import uz.gullbozor.gullbozor.dto.GetPriceList;
 import uz.gullbozor.gullbozor.dto.NewOrderParam;
-import uz.gullbozor.gullbozor.entity.CompanyEntity;
-import uz.gullbozor.gullbozor.entity.Glass;
-import uz.gullbozor.gullbozor.entity.OrderBodyPvhWin;
-import uz.gullbozor.gullbozor.entity.OthersPrice;
-import uz.gullbozor.gullbozor.repository.CompanyRepo;
-import uz.gullbozor.gullbozor.repository.GlassRepo;
-import uz.gullbozor.gullbozor.repository.OtherPriceRepo;
+import uz.gullbozor.gullbozor.entity.*;
+import uz.gullbozor.gullbozor.repository.*;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -26,6 +25,11 @@ public class OrderCalculateService {
 
     @Autowired
     private CompanyRepo companyRepo;
+
+    @Autowired
+    private OrderBodyPvhWinRepo orderBodyPvhWinRepo;
+    @Autowired
+    private CategoryRepo categoryRepo;
 
     public Integer getPvhL(Integer width, Integer height) {
         return (width + height + 12) * 2;
@@ -153,12 +157,83 @@ public class OrderCalculateService {
 
     }
 
+    public ApiResponse completed(List<NewOrderParam> newOrderParamList) {
+        int index = 0;
+        Double cost = null;
+        Double lastTotalPrice = null;
+        Double totalPrice = null;
+        Double partOfCompany = null;
+        NewOrderParam newOrderParam1 = newOrderParamList.get(0);
+        Order order = new Order();
+        Long id = order.getId();
+
+        while (!newOrderParamList.isEmpty()) {
+
+            NewOrderParam newOrderParam = newOrderParamList.get(index);
+            ApiResponse apiResponse = calculateOrder(newOrderParam);
+            ProductHead productHead = (ProductHead) apiResponse.getObject();
+            productHead.setOrderId(id);
+            cost += productHead.getCost();
+            lastTotalPrice += productHead.getLastTotalPrice();
+            totalPrice += productHead.getTotalPrice();
+            partOfCompany += productHead.getPartOfCompany();
+            index++;
+        }
+
+        order.setOrderHolderName(newOrderParam1.getOrderHolderName());
+        order.setOrderHolderPhone(newOrderParam1.getOrderHolderPhone());
+
+        order.setStatus((byte) 0);
+        order.setTotalPrice(totalPrice);
+        order.setCost(cost);
+        order.setLastTotalPrice(lastTotalPrice);
+        order.setPartOfCompany(partOfCompany);
+
+        return new ApiResponse(order);
+
+    }
+
+    public List<GetPriceList> getPriceLists(NewOrderParam newOrderParam, Integer cityId) {
+
+        GetPriceList getPriceList = new GetPriceList();
+        List<GetPriceList> getPriceLists = new ArrayList<>();
+        int a = 0;
+
+        for (CompanyEntity companyEntity : companyRepo.findAllByCityId(cityId)) {
+
+
+            Long companyId = companyEntity.getId();
+
+            newOrderParam.setCompanyId(companyId);
+            newOrderParam.setResponseToCompany(false);
+
+            ApiResponse apiResponse = calculateOrder(newOrderParam);
+            OrderHead orderHead = (OrderHead) apiResponse.getObject();
+
+            getPriceList.setTotalPrice(orderHead.getTotalPrice());
+            getPriceList.setLocation(companyEntity.getLocation());
+            getPriceList.setTgLink(companyEntity.getTgLink());
+            getPriceList.setStars(companyEntity.getStars());
+            getPriceList.setCompanyName(companyEntity.getCompanyName());
+
+            getPriceLists.add(getPriceList);
+
+            a++;
+            if (a==15) return getPriceLists;
+
+
+        }
+        return getPriceLists;
+    }
+
     public ApiResponse calculateOrder(NewOrderParam newOrderParam) {
+
         Integer category = newOrderParam.getCategory();
         Optional<OthersPrice> byyCompanyId = otherPriceRepo.findByCompanyId(newOrderParam.getCompanyId());
         OthersPrice othersPrice = byyCompanyId.get();
 
         OrderBodyPvhWin orderBodyPvhWin = new OrderBodyPvhWin();
+        ProductHead productHead = new ProductHead();
 
         Optional<CompanyEntity> optionalCompany = companyRepo.findById(newOrderParam.getCompanyId());
         CompanyEntity companyEntity = optionalCompany.get();
@@ -206,6 +281,9 @@ public class OrderCalculateService {
 //                |______|______|
 
 
+
+
+
                 if (category > 2) {
                     orderBodyPvhWin.setIkkitalikMexanizm(othersPrice.getIkkitalikMexanizmPrice());
                 }
@@ -229,14 +307,19 @@ public class OrderCalculateService {
                 glass1.setHeight(height - 111);
                 glass1.setWidth((((width - 96) / 2) - 34));
                 glass1.setCount((byte) 2);
+                Glass save = glassRepo.save(glass1);
+
+                orderBodyPvhWin.setGlass1(save.getId());
 
 
                 glass2.setHeight(((T - 81)));
                 glass2.setWidth((((width - 96) / 2) - 125));
                 glass2.setCount((byte) 2);
+                Glass save1 = glassRepo.save(glass2);
 
-                glassRepo.save(glass1);
-                glassRepo.save(glass2);
+                orderBodyPvhWin.setGlass2(save1.getId());
+
+
                 //Chit
                 chitLength = (2 * (glass1.getHeight() + glass1.getWidth()) + 2 * (glass2.getWidth() + glass2.getHeight()) - 80);
                 rezinaPvhLength = (chitLength + 200);
@@ -311,18 +394,39 @@ public class OrderCalculateService {
                     totalPrice = (totalPrice + orderBodyPvhWin.getPetlyaSum() + orderBodyPvhWin.getSamarezSum());
                 }
 
-                totalPrice = (totalPrice - newOrderParam.getSalePriceDto());
-                orderBodyPvhWin.setTotalPrice(totalPrice);
-                orderBodyPvhWin.setSalePrice(newOrderParam.getSalePriceDto());
-                partOfWindow = companyEntity.getPartOfWindow();
 
-                orderBodyPvhWin.setSalePrice(newOrderParam.getSalePriceDto());
+                orderBodyPvhWin.setTotalPrice(totalPrice);
+                partOfWindow = companyEntity.getPartOfWindow();
                 partOfWindow = ((totalPrice / 100) * partOfWindow);
 
 
+                orderBodyPvhWin.setOrderCost(totalPrice-partOfWindow);
+
                 orderBodyPvhWin.setCompanyPartPrice(partOfWindow);
 
-                return new ApiResponse(orderBodyPvhWin);
+
+
+
+                productHead.setPartOfCompany(partOfWindow);
+                productHead.setCategory(orderBodyPvhWin.getCategoryNum());
+                productHead.setCompanyId(newOrderParam.getCompanyId());
+                productHead.setCost(orderBodyPvhWin.getOrderCost());
+                productHead.setDiscount(orderBodyPvhWin.getSalePrice());
+                productHead.setColorNumber(orderBodyPvhWin.getColor());
+                productHead.setGlassNumber(productHead.getGlassNumber());
+                productHead.setShelfSize(productHead.getShelfSize());
+                productHead.setRuchkaNumber(newOrderParam.getRuchka());
+                productHead.setLastTotalPrice(orderBodyPvhWin.getTotalPrice());
+                productHead.setCount(newOrderParam.getCount());
+                productHead.setHeight(newOrderParam.getHeight());
+                productHead.setWidth(newOrderParam.getWidth());
+
+
+                if (newOrderParam.isResponseToCompany()){
+                    return new ApiResponse(orderBodyPvhWin);
+                }else {
+                    return new ApiResponse(productHead);
+                }
 
 
             case 5:
@@ -450,19 +554,35 @@ public class OrderCalculateService {
                     totalPrice = (totalPrice + orderBodyPvhWin.getPetlyaSum() + orderBodyPvhWin.getSamarezSum());
                 }
 
-                totalPrice = (totalPrice - newOrderParam.getSalePriceDto());
+
                 orderBodyPvhWin.setTotalPrice(totalPrice);
-                orderBodyPvhWin.setSalePrice(newOrderParam.getSalePriceDto());
+
                 partOfWindow = companyEntity.getPartOfWindow();
 
-                orderBodyPvhWin.setSalePrice(newOrderParam.getSalePriceDto());
                 partOfWindow = ((totalPrice / 100) * partOfWindow);
 
 
                 orderBodyPvhWin.setCompanyPartPrice(partOfWindow);
 
-                return new ApiResponse(orderBodyPvhWin);
+                productHead.setPartOfCompany(partOfWindow);
+                productHead.setCategory(orderBodyPvhWin.getCategoryNum());
+                productHead.setCompanyId(newOrderParam.getCompanyId());
+                productHead.setCost(orderBodyPvhWin.getOrderCost());
+                productHead.setDiscount(orderBodyPvhWin.getSalePrice());
+                productHead.setColorNumber(orderBodyPvhWin.getColor());
+                productHead.setGlassNumber(productHead.getGlassNumber());
+                productHead.setShelfSize(productHead.getShelfSize());
+                productHead.setRuchkaNumber(newOrderParam.getRuchka());
+                productHead.setLastTotalPrice(orderBodyPvhWin.getTotalPrice());
+                productHead.setCount(newOrderParam.getCount());
+                productHead.setHeight(newOrderParam.getHeight());
+                productHead.setWidth(newOrderParam.getWidth());
 
+                if (newOrderParam.isResponseToCompany()){
+                    return new ApiResponse(orderBodyPvhWin);
+                }else {
+                    return new ApiResponse(productHead);
+                }
 
 
             case 11:
@@ -587,18 +707,37 @@ public class OrderCalculateService {
                     totalPrice = (totalPrice + orderBodyPvhWin.getPetlyaSum() + orderBodyPvhWin.getSamarezSum());
                 }
 
-                totalPrice = (totalPrice - newOrderParam.getSalePriceDto());
+
                 orderBodyPvhWin.setTotalPrice(totalPrice);
-                orderBodyPvhWin.setSalePrice(newOrderParam.getSalePriceDto());
+
                 partOfWindow = companyEntity.getPartOfWindow();
 
-                orderBodyPvhWin.setSalePrice(newOrderParam.getSalePriceDto());
+
                 partOfWindow = ((totalPrice / 100) * partOfWindow);
 
 
                 orderBodyPvhWin.setCompanyPartPrice(partOfWindow);
 
-                return new ApiResponse(orderBodyPvhWin);
+                productHead.setPartOfCompany(partOfWindow);
+                productHead.setCategory(orderBodyPvhWin.getCategoryNum());
+                productHead.setCompanyId(newOrderParam.getCompanyId());
+                productHead.setCost(orderBodyPvhWin.getOrderCost());
+                productHead.setDiscount(orderBodyPvhWin.getSalePrice());
+                productHead.setColorNumber(orderBodyPvhWin.getColor());
+                productHead.setGlassNumber(productHead.getGlassNumber());
+                productHead.setShelfSize(productHead.getShelfSize());
+                productHead.setRuchkaNumber(newOrderParam.getRuchka());
+                productHead.setLastTotalPrice(orderBodyPvhWin.getTotalPrice());
+                productHead.setCount(newOrderParam.getCount());
+                productHead.setHeight(newOrderParam.getHeight());
+                productHead.setWidth(newOrderParam.getWidth());
+
+                if (newOrderParam.isResponseToCompany()){
+                    return new ApiResponse(orderBodyPvhWin);
+                }else {
+                    return new ApiResponse(productHead);
+                }
+
 
             case 15:
             case 16:
@@ -718,18 +857,34 @@ public class OrderCalculateService {
                     totalPrice = (totalPrice + orderBodyPvhWin.getPetlyaSum() + orderBodyPvhWin.getSamarezSum());
                 }
 
-                totalPrice = (totalPrice - newOrderParam.getSalePriceDto());
-                orderBodyPvhWin.setTotalPrice(totalPrice);
-                orderBodyPvhWin.setSalePrice(newOrderParam.getSalePriceDto());
-                partOfWindow = companyEntity.getPartOfWindow();
 
-                orderBodyPvhWin.setSalePrice(newOrderParam.getSalePriceDto());
+                orderBodyPvhWin.setTotalPrice(totalPrice);
+
+                partOfWindow = companyEntity.getPartOfWindow();
                 partOfWindow = ((totalPrice / 100) * partOfWindow);
 
 
                 orderBodyPvhWin.setCompanyPartPrice(partOfWindow);
 
-                return new ApiResponse(orderBodyPvhWin);
+                productHead.setPartOfCompany(partOfWindow);
+                productHead.setCategory(orderBodyPvhWin.getCategoryNum());
+                productHead.setCompanyId(newOrderParam.getCompanyId());
+                productHead.setCost(orderBodyPvhWin.getOrderCost());
+                productHead.setDiscount(orderBodyPvhWin.getSalePrice());
+                productHead.setColorNumber(orderBodyPvhWin.getColor());
+                productHead.setGlassNumber(productHead.getGlassNumber());
+                productHead.setShelfSize(productHead.getShelfSize());
+                productHead.setRuchkaNumber(newOrderParam.getRuchka());
+                productHead.setLastTotalPrice(orderBodyPvhWin.getTotalPrice());
+                productHead.setCount(newOrderParam.getCount());
+                productHead.setHeight(newOrderParam.getHeight());
+                productHead.setWidth(newOrderParam.getWidth());
+
+                if (newOrderParam.isResponseToCompany()){
+                    return new ApiResponse(orderBodyPvhWin);
+                }else {
+                    return new ApiResponse(productHead);
+                }
 
             case 19:
             case 20:
@@ -850,19 +1005,36 @@ public class OrderCalculateService {
                     totalPrice = (totalPrice + orderBodyPvhWin.getPetlyaSum() + orderBodyPvhWin.getSamarezSum());
                 }
 
-                totalPrice = (totalPrice - newOrderParam.getSalePriceDto());
+
                 orderBodyPvhWin.setTotalPrice(totalPrice);
-                orderBodyPvhWin.setSalePrice(newOrderParam.getSalePriceDto());
+
                 partOfWindow = companyEntity.getPartOfWindow();
 
-                orderBodyPvhWin.setSalePrice(newOrderParam.getSalePriceDto());
+
                 partOfWindow = ((totalPrice / 100) * partOfWindow);
 
 
                 orderBodyPvhWin.setCompanyPartPrice(partOfWindow);
 
-                return new ApiResponse(orderBodyPvhWin);
+                productHead.setPartOfCompany(partOfWindow);
+                productHead.setCategory(orderBodyPvhWin.getCategoryNum());
+                productHead.setCompanyId(newOrderParam.getCompanyId());
+                productHead.setCost(orderBodyPvhWin.getOrderCost());
+                productHead.setDiscount(orderBodyPvhWin.getSalePrice());
+                productHead.setColorNumber(orderBodyPvhWin.getColor());
+                productHead.setGlassNumber(productHead.getGlassNumber());
+                productHead.setShelfSize(productHead.getShelfSize());
+                productHead.setRuchkaNumber(newOrderParam.getRuchka());
+                productHead.setLastTotalPrice(orderBodyPvhWin.getTotalPrice());
+                productHead.setCount(newOrderParam.getCount());
+                productHead.setHeight(newOrderParam.getHeight());
+                productHead.setWidth(newOrderParam.getWidth());
 
+                if (newOrderParam.isResponseToCompany()){
+                    return new ApiResponse(orderBodyPvhWin);
+                }else {
+                    return new ApiResponse(productHead);
+                }
 
 
             case 21:

@@ -109,6 +109,7 @@ public class CompanyEntity implements UserDetails {
     private Long phoneClick;
     private Long view;
     private Boolean installIsFree;
+    private Byte stars;
 
 
 }

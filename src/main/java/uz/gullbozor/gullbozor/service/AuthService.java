@@ -114,7 +114,7 @@ public class AuthService implements UserDetailsService {
               user.setPassword(passwordEncoder.encode(registerDto.getUserName()));
               user.setUsernameTest(registerDto.getUserName());     // usernameTest - username
 
-              user.setShopId(registerDto.getShopId());
+
               if (registerDto.getPhoneNumber().equals("+998977169686")){
                   user.setRoles(Collections.singleton(roleRepo.findByName(RoleName.ROLE_ADMIN)));
               }else {

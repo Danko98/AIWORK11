@@ -76,6 +76,8 @@ public class OthersPrice {
 
     private Double ruchka155Price;
     private Double ruchka153Price;
+    private Double ruchkaPvhPrice;
+    private Double ruchkaPvhColorPrice;
     private Double ruchka155PriceColor;
     private Double ruchka153PriceColor;
     private Double petlyaPrice;
@@ -94,10 +96,12 @@ public class OthersPrice {
     private Double ispandiletPrice;
     private Double sulchikPrice;
     private Double sulchikPriceColor;
-    private Double ilmoqPrice;
-    private Double ilmoqPriceColor;
+    private Double ilmoqAluPrice;
+    private Double ilmoqAluPriceColor;
+    private Double ilmoqPvhPrice;
+    private Double ilmoqPvhPriceColor;
     private Double zamok155MiniPrice;
-    private Double zamok155MaxPrice;
+    private Double zamok155Price;
     private Double zamok153Price;
     private Double archaMiniPrice;
     private Double archaBalkonPrice;

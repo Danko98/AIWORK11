@@ -23,7 +23,6 @@ public class SmsController {
         return ResponseEntity.ok(smsToken);
     }
 
-    // @PreAuthorize(value = "hasRole('ROLE_ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse> editSmsToken(@RequestBody SmsTokenDto smsTokenDto,@PathVariable Long id) {
         ApiResponse apiResponse = authService.editSmsToken(smsTokenDto, id);

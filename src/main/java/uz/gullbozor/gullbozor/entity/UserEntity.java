@@ -92,6 +92,4 @@ public class UserEntity extends BaseEntity implements UserDetails {
     // base entityda qachon user ro'yxatdan o'tganligi bor
 
 
-
-
 }

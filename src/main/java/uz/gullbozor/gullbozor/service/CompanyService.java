@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uz.gullbozor.gullbozor.apiResponse.ApiResponse;
 import uz.gullbozor.gullbozor.dto.CompanyRegisterDto;
-import uz.gullbozor.gullbozor.entity.CityEntity;
 import uz.gullbozor.gullbozor.entity.CompanyEntity;
-import uz.gullbozor.gullbozor.repository.CityRepo;
 import uz.gullbozor.gullbozor.repository.CompanyRepo;
 
 import java.util.List;
@@ -19,7 +17,7 @@ public class CompanyService {
     private CompanyRepo companyRepo;
 
     public ApiResponse addCompany(CompanyRegisterDto companyRegisterDto) {
-        if (!companyRepo.existsByCompanyOwnerId(companyRegisterDto.getCompanyOwnerId())) {
+        if (companyRepo.existsByCompanyOwnerId(companyRegisterDto.getCompanyOwnerId())) {
 
             CompanyEntity companyEntity = new CompanyEntity();
             companyEntity.setCompanyName(companyRegisterDto.getCompanyName());
@@ -48,7 +46,7 @@ public class CompanyService {
 
         if (companyRepo.existsById(companyId)) {
 
-            if (!companyRepo.existsByCompanyOwnerId(companyRegisterDto.getCompanyOwnerId())) {
+            if (companyRepo.existsByCompanyOwnerId(companyRegisterDto.getCompanyOwnerId())) {
 
                 Optional<CompanyEntity> optionalCompanyEntity = companyRepo.findById(companyId);
                 CompanyEntity companyEntity = optionalCompanyEntity.get();
