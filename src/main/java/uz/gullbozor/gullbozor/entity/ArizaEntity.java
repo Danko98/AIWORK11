@@ -20,7 +20,7 @@ public class ArizaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long createAt;
+    private String createAt;
     private Integer width;
     private Integer height;
     private Byte colorNumber;
@@ -29,5 +29,6 @@ public class ArizaEntity {
     private Byte shelfSize;
     private String name;
     private String phoneNumber;
+    private String regionId;
 
 }

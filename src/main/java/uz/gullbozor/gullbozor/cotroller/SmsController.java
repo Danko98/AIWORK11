@@ -11,6 +11,7 @@ import uz.gullbozor.gullbozor.service.AuthService;
 
 @RestController
 @RequestMapping("/sms")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class SmsController {
 
     @Autowired

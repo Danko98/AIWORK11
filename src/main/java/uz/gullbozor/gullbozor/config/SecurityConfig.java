@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .httpBasic().disable()
-                .cors().and()
+                .cors().disable()
                 .authorizeRequests()
                 .antMatchers("/**","/auth/login","/auth/registerUser","/role","/swagger-ui.html").permitAll()
                 .anyRequest().authenticated();
@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration cors = new CorsConfiguration();
-        cors.setAllowedOrigins(Arrays.asList("https://gulbazar.uz","http://localhost:3000","http://127.0.0.1:5501"));
+        cors.setAllowedOrigins(Arrays.asList("https://romchi.uz/","https://roomchi-uz.vercel.app/**","https://gulbazar.uz","http://localhost:3000","http://127.0.0.1:5501"));
         cors.setAllowedMethods(Arrays.asList("GET","POST", "PUT", "DELETE", "OPTIONS"));
         cors.setAllowedHeaders(Arrays.asList("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

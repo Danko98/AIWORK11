@@ -13,6 +13,7 @@ import uz.gullbozor.gullbozor.verifysms.PhoneVerificationService;
 
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AuthController {
 
     @Autowired

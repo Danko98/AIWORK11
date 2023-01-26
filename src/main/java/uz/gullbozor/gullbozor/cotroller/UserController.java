@@ -16,19 +16,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
 
 
     @Autowired
     private UserService userService;
 
-
     @Autowired
     private PhoneVerificationService phoneVerificationService;
-
-
-
-
 
     @PreAuthorize(value = "hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @PutMapping("/{id}")  // userni tahrirlash

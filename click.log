@@ -1,36 +1,34 @@
-2022-12-30 02:32:07 - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m10s250ms).
-2022-12-30 02:34:28 - Closing JPA EntityManagerFactory for persistence unit 'default'
-2022-12-30 02:34:28 - HikariPool-1 - Shutdown initiated...
-2022-12-30 02:34:28 - HikariPool-1 - Shutdown completed.
-2022-12-30 04:08:31 - Starting GullBozorApplication using Java 19.0.1 on MacBooks-MacBook-Pro.local with PID 7729 (/Users/macbookpro/Desktop/AIWORK11/target/classes started by macbookpro in /Users/macbookpro/Desktop/AIWORK11)
-2022-12-30 04:08:31 - The following 1 profile is active: "dev"
-2022-12-30 04:08:32 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2022-12-30 04:08:32 - Finished Spring Data repository scanning in 77 ms. Found 23 JPA repository interfaces.
-2022-12-30 04:08:33 - Tomcat initialized with port(s): 8080 (http)
-2022-12-30 04:08:33 - Starting service [Tomcat]
-2022-12-30 04:08:33 - Starting Servlet engine: [Apache Tomcat/9.0.62]
-2022-12-30 04:08:33 - Initializing Spring embedded WebApplicationContext
-2022-12-30 04:08:33 - Root WebApplicationContext: initialization completed in 1717 ms
-2022-12-30 04:08:33 - HikariPool-1 - Starting...
-2022-12-30 04:08:34 - HikariPool-1 - Start completed.
-2022-12-30 04:08:35 - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2022-12-30 04:08:36 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-12-30 04:08:36 - Unable to proxy interface-implementing method [public final void org.springframework.web.filter.OncePerRequestFilter.doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain) throws javax.servlet.ServletException,java.io.IOException] because it is marked as final: Consider using interface-based JDK proxies instead!
-2022-12-30 04:08:36 - Unable to proxy interface-implementing method [public final void org.springframework.web.filter.GenericFilterBean.init(javax.servlet.FilterConfig) throws javax.servlet.ServletException] because it is marked as final: Consider using interface-based JDK proxies instead!
-2022-12-30 04:08:37 - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4a592d22, org.springframework.security.web.context.SecurityContextPersistenceFilter@276ac94c, org.springframework.security.web.header.HeaderWriterFilter@6bc45472, org.springframework.web.filter.CorsFilter@20072ff1, org.springframework.security.web.authentication.logout.LogoutFilter@13056efe, uz.gullbozor.gullbozor.security.JwtFilter@684a34f4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@ab5e63, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@d88d9d7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@8374911, org.springframework.security.web.session.SessionManagementFilter@4832813d, org.springframework.security.web.access.ExceptionTranslationFilter@25e9f5e6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4a23be9]
-2022-12-30 04:08:37 - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
-2022-12-30 04:08:37 - Tomcat started on port(s): 8080 (http) with context path ''
-2022-12-30 04:08:37 - Context refreshed
-2022-12-30 04:08:37 - Found 1 custom documentation plugin(s)
-2022-12-30 04:08:38 - Scanning for api listing references
-2022-12-30 04:08:38 - Generating unique operation named: getAnnouncesByShopIdUsingGET_1
-2022-12-30 04:08:38 - Generating unique operation named: getAnnouncesByShopIdUsingGET_2
-2022-12-30 04:08:38 - Generating unique operation named: deleteRegionByIdUsingDELETE_1
-2022-12-30 04:08:38 - Generating unique operation named: deleteByIdUsingDELETE_1
-2022-12-30 04:08:38 - Generating unique operation named: deleteAllByPinUsingDELETE_1
-2022-12-30 04:08:38 - Generating unique operation named: deleteByIdUsingDELETE_2
-2022-12-30 04:08:38 - Started GullBozorApplication in 7.56 seconds (JVM running for 13.538)
-2022-12-30 04:38:21 - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m47s236ms).
-2022-12-30 04:39:39 - Closing JPA EntityManagerFactory for persistence unit 'default'
-2022-12-30 04:39:39 - HikariPool-1 - Shutdown initiated...
-2022-12-30 04:39:39 - HikariPool-1 - Shutdown completed.
+2023-01-26 12:52:43 - Starting GullBozorApplication using Java 19.0.1 on MacBooks-MacBook-Pro.local with PID 9487 (/Users/macbookpro/Desktop/AIWORK11/target/classes started by macbookpro in /Users/macbookpro/Desktop/AIWORK11)
+2023-01-26 12:52:43 - The following 1 profile is active: "dev"
+2023-01-26 12:52:44 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-01-26 12:52:44 - Finished Spring Data repository scanning in 98 ms. Found 23 JPA repository interfaces.
+2023-01-26 12:52:44 - Tomcat initialized with port(s): 8080 (http)
+2023-01-26 12:52:44 - Starting service [Tomcat]
+2023-01-26 12:52:44 - Starting Servlet engine: [Apache Tomcat/9.0.62]
+2023-01-26 12:52:45 - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-01-26 12:52:45 - Initializing Spring embedded WebApplicationContext
+2023-01-26 12:52:45 - Root WebApplicationContext: initialization completed in 2084 ms
+2023-01-26 12:52:45 - HikariPool-1 - Starting...
+2023-01-26 12:52:46 - HikariPool-1 - Start completed.
+2023-01-26 12:52:47 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-01-26 12:52:48 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-01-26 12:52:48 - Unable to proxy interface-implementing method [public final void org.springframework.web.filter.OncePerRequestFilter.doFilter(javax.servlet.ServletRequest,javax.servlet.ServletResponse,javax.servlet.FilterChain) throws javax.servlet.ServletException,java.io.IOException] because it is marked as final: Consider using interface-based JDK proxies instead!
+2023-01-26 12:52:48 - Unable to proxy interface-implementing method [public final void org.springframework.web.filter.GenericFilterBean.init(javax.servlet.FilterConfig) throws javax.servlet.ServletException] because it is marked as final: Consider using interface-based JDK proxies instead!
+2023-01-26 12:52:49 - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7902a4d7, org.springframework.security.web.context.SecurityContextPersistenceFilter@77107573, org.springframework.security.web.header.HeaderWriterFilter@1427827f, org.springframework.security.web.authentication.logout.LogoutFilter@4a52178, uz.gullbozor.gullbozor.security.JwtFilter@2297c8bf, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5843ab8, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@57fd3b57, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6f8fa77a, org.springframework.security.web.session.SessionManagementFilter@37c5a3c7, org.springframework.security.web.access.ExceptionTranslationFilter@4d343793, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1a389b39]
+2023-01-26 12:52:49 - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-01-26 12:52:50 - Tomcat started on port(s): 8080 (http) with context path ''
+2023-01-26 12:52:50 - Context refreshed
+2023-01-26 12:52:50 - Found 1 custom documentation plugin(s)
+2023-01-26 12:52:50 - Scanning for api listing references
+2023-01-26 12:52:50 - Generating unique operation named: getAnnouncesByShopIdUsingGET_1
+2023-01-26 12:52:50 - Generating unique operation named: getAnnouncesByShopIdUsingGET_2
+2023-01-26 12:52:50 - Generating unique operation named: checkPhoneNumberUsingPOST_1
+2023-01-26 12:52:50 - Generating unique operation named: deleteByIdUsingDELETE_1
+2023-01-26 12:52:51 - Generating unique operation named: deleteRegionByIdUsingDELETE_1
+2023-01-26 12:52:51 - Generating unique operation named: deleteByIdUsingDELETE_2
+2023-01-26 12:52:51 - Generating unique operation named: deleteAllByPinUsingDELETE_1
+2023-01-26 12:52:51 - Generating unique operation named: deleteByIdUsingDELETE_3
+2023-01-26 12:52:51 - Started GullBozorApplication in 8.517 seconds (JVM running for 14.486)
+2023-01-26 12:53:07 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-01-26 12:53:07 - HikariPool-1 - Shutdown initiated...
+2023-01-26 12:53:07 - HikariPool-1 - Shutdown completed.
