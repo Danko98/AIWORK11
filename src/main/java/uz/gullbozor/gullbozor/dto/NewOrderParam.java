@@ -20,6 +20,8 @@ public class NewOrderParam {
     private String orderHolderName;
     private String orderHolderPhone;
     private Byte ruchka;
+    private String region;
+    private String city;
     private boolean responseToCompany;
 
 }

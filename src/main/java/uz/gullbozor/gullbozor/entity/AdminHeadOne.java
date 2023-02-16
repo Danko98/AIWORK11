@@ -1,5 +1,6 @@
 package uz.gullbozor.gullbozor.entity;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,19 +13,20 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "shop")
-public class ShopEntity {
+@Table(name = "admin_head_one")
+public class AdminHeadOne {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long calls;
+    private Long buys;
+    private Long visitors;
 
-    private String shopName;
-    private Long sellerId;
-    private String phoneNumber1;
-    private String phoneNumber2;
-    private Integer regionId;
-    private Integer cityId;
-    private String streetHouse;
+    private Short year;
+    private Byte month;
+    private String monthName;
+
 
 }

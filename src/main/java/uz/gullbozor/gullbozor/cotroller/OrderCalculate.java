@@ -31,7 +31,6 @@ public class OrderCalculate {
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }
 
-
     @GetMapping("/getPriceList/{cityId}")
     private List<GetPriceList> getPriceLists(@RequestBody NewOrderParam newOrderParam, @PathVariable Integer cityId) {
 

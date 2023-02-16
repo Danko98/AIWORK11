@@ -1,4 +1,5 @@
 package uz.gullbozor.gullbozor.cotroller;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,16 +17,17 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.Iterator;
+import java.util.UUID;
 
 
 @RestController
 @RequestMapping("/attachment")
-public class  AttachmentController {
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+public class AttachmentController {
 
     @Autowired
     private AttachRepo attachRepo;
-
 
     @Autowired
     private MainAttachRepo mainAttachRepo;
@@ -35,8 +37,7 @@ public class  AttachmentController {
 
     private static final String uploadDirectory= "yuklanganlar";
 
-
-    @PreAuthorize(value = "hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+//    @PreAuthorize(value = "hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @PostMapping("/uploadImage")
     public ImageDto uploadToSystem(MultipartHttpServletRequest request) throws IOException {
 
@@ -45,7 +46,7 @@ public class  AttachmentController {
         ImageDto imageDto = new ImageDto();
 
         while (fileNames.hasNext()) {
-            String baseUrl = "http://185.217.131.168:8080/attachment/open/";
+            String baseUrl = "http://185.217.131.88:8080/attachment/open/";
             count++;
             MultipartFile file = request.getFile(fileNames.next());
             if (file != null) {
@@ -94,7 +95,7 @@ public class  AttachmentController {
         return imageDto;
     }
 
-    @PreAuthorize(value = "hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+//    @PreAuthorize(value = "hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @PostMapping("/uploadImageOne")
     public ResponseEntity<String> uploadToSystemOne(MultipartHttpServletRequest request) throws IOException {
 
@@ -128,8 +129,8 @@ public class  AttachmentController {
     }
 
     @GetMapping(value = "/open/{mainAttachId}", produces = MediaType.ALL_VALUE)
-    public byte[] getImageByte(@PathVariable("mainAttachId") Long  mainAttachId) {
-        return attachService.open_general(mainAttachId);
+    public ResponseEntity<?> getImageByte(@PathVariable("mainAttachId") Long  mainAttachId) {
+         return ResponseEntity.ok().header("Content-Type","image/png").body(attachService.open_general(mainAttachId));
     }
 
 

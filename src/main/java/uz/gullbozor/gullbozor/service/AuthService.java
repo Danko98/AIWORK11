@@ -16,6 +16,7 @@ import uz.gullbozor.gullbozor.apiResponse.ApiResponse;
 import uz.gullbozor.gullbozor.apiResponse.UserData;
 import uz.gullbozor.gullbozor.dto.*;
 import uz.gullbozor.gullbozor.entity.CompanyOwner;
+import uz.gullbozor.gullbozor.entity.Role;
 import uz.gullbozor.gullbozor.entity.SmsToken;
 import uz.gullbozor.gullbozor.entity.UserEntity;
 import uz.gullbozor.gullbozor.entity.enums.RoleName;
@@ -50,6 +51,9 @@ public class AuthService implements UserDetailsService {
     private RoleRepo roleRepo;
 
     @Autowired
+    private RoleService roleService;
+
+    @Autowired
     PhoneVerificationService phoneVerificationService;
 
     @Autowired
@@ -60,6 +64,8 @@ public class AuthService implements UserDetailsService {
 
     @Autowired
     private SmsRepo smsRepo;
+
+
 
     public UserData checkPhoneNumber(CheckPhoneNumberDto checkPhoneNumberDto) {
         if (userRepo.existsByUsername(checkPhoneNumberDto.getPhoneNumber()) ){
@@ -98,33 +104,50 @@ public class AuthService implements UserDetailsService {
 //    }
 
     public ApiResponse registerUser(RegisterDto registerDto) {
-        if (registerDto.getSecretKey().equals("abdulqosimakanaikenjaqizi"))
+        if (registerDto.getSecretKey().equals("abdulqosimakanaikenjaqizi")) {
 
-      if (userRepo.existsByUsername(registerDto.getPhoneNumber())) {
-          return new ApiResponse("Bu telefon raqam ro'yxatdan o'tgan",false);
+            if (userRepo.existsByUsername(registerDto.getPhoneNumber())) {
+///________________________________________________________________________________________________
+                Optional<UserEntity> byUsername = userRepo.findByUsername(registerDto.getPhoneNumber());
+                UserEntity userEntity = byUsername.get();
+
+                userRepo.deleteById(userEntity.getId());
+
+                //__________________________________________________________________
+                return new ApiResponse("Bu telefon raqam ro'yxatdan o'tgan edi biz o'chirdik", false);
+            }
+
+            Date date = new Date();
+
+            UserEntity user = new UserEntity();
+            user.setCreateAt(date.getTime());
+            user.setSurname(registerDto.getSurname());
+
+            user.setUsername(registerDto.getPhoneNumber());      //username - telnomer
+            user.setPassword(passwordEncoder.encode(registerDto.getUserName()));
+            user.setUsernameTest(registerDto.getUserName());     // usernameTest - username
+
+
+            if (!roleRepo.existsByName(RoleName.ROLE_USER)) {
+                roleService.addRole();
+            }
+
+            if (registerDto.getPhoneNumber().equals("+998977169686")) {
+
+                user.setRoles(Collections.singleton(roleRepo.findByName(RoleName.ROLE_ADMIN)));
+            } else {
+                user.setRoles(Collections.singleton(roleRepo.findByName(RoleName.ROLE_USER)));
+            }
+            user.setEnabled(true);
+
+            UserEntity save = userRepo.save(user);
+
+            return new ApiResponse(save);
+
+        }else {
+            return new ApiResponse("SecretKey xato",false);
         }
 
-        Date date = new Date();
-
-              UserEntity user = new UserEntity();
-              user.setCreateAt(date.getTime());
-              user.setSurname(registerDto.getSurname());
-
-              user.setUsername(registerDto.getPhoneNumber());      //username - telnomer
-              user.setPassword(passwordEncoder.encode(registerDto.getUserName()));
-              user.setUsernameTest(registerDto.getUserName());     // usernameTest - username
-
-
-              if (registerDto.getPhoneNumber().equals("+998977169686")){
-                  user.setRoles(Collections.singleton(roleRepo.findByName(RoleName.ROLE_ADMIN)));
-              }else {
-                  user.setRoles(Collections.singleton(roleRepo.findByName(RoleName.ROLE_USER)));
-              }
-              user.setEnabled(true);
-
-        UserEntity save = userRepo.save(user);
-
-        return new ApiResponse(save);
     }
 
     public ApiResponse registerCompanyOwner(RegisterCompanyOwner registerCompanyOwner) {
@@ -156,7 +179,6 @@ public class AuthService implements UserDetailsService {
 
         return new ApiResponse(save);
     }
-
 
     public ApiResponse createSmsToken(SmsTokenDto smsTokenDto) {
             if (smsRepo.existsBySmsToken(smsTokenDto.getSmsToken())) {
@@ -202,7 +224,6 @@ public class AuthService implements UserDetailsService {
 
         return new ApiResponse(smsToken.getSmsToken(), generatedNumber);
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String  username) throws UsernameNotFoundException {

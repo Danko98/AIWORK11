@@ -8,7 +8,6 @@ import uz.gullbozor.gullbozor.entity.MainAttach;
 import uz.gullbozor.gullbozor.repository.AttachRepo;
 import uz.gullbozor.gullbozor.repository.MainAttachRepo;
 
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
